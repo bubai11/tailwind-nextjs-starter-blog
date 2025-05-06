@@ -1,0 +1,73 @@
+name: 博客文章
+description: 创建一篇新的博客文章
+title: '[文章]: '
+labels: ['content']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你为博客创作新的文章！请填写以下信息来帮助规划和追踪文章的进度。
+
+  - type: input
+    id: title
+    attributes:
+      label: 文章标题
+      description: 请输入文章的标题
+      placeholder: 例如：如何使用 GitHub Actions 自动化博客工作流
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 文章摘要
+      description: 请简要描述文章的主要内容
+      placeholder: 这篇文章将介绍...
+    validations:
+      required: true
+
+  - type: textarea
+    id: outline
+    attributes:
+      label: 文章大纲
+      description: 请列出文章的主要章节
+      placeholder: |
+        1. 引言
+        2. 主要内容
+           - 小节 1
+           - 小节 2
+        3. 总结
+    validations:
+      required: true
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: 参考资源
+      description: 列出写作过程中需要参考的资源（可选）
+      placeholder: |
+        - 相关文档链接
+        - 参考文章
+        - 示例代码
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 优先级
+      description: 这篇文章的优先级如何？
+      options:
+        - 高
+        - 中
+        - 低
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 其他备注
+      description: 其他需要说明的事项（可选）
+    validations:
+      required: false

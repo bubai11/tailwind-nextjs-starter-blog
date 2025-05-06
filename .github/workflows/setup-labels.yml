@@ -1,0 +1,23 @@
+name: Setup Labels
+
+on:
+  workflow_dispatch: # 允许手动触发
+  push:
+    paths:
+      - '.github/scripts/setup-labels.sh' # 当脚本更新时触发
+    branches:
+      - main # 只在主分支上触发
+
+jobs:
+  setup-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x .github/scripts/setup-labels.sh
+
+      - name: Setup Labels
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: .github/scripts/setup-labels.sh
