@@ -1,12 +1,13 @@
 ---
 title: 'New features in v1'
-date: 2021-08-07T15:32:14Z
-lastmod: '2021-02-01'
+date: '2023-08-05'
+lastmod: '2023-08-05'
 tags: ['next-js', 'tailwind', 'guide']
 draft: false
 summary: 'An overview of the new features released in v1 - code block copy, multiple authors, frontmatter layout and more'
 layout: PostSimple
 bibliography: references-data.bib
+category: 'Tutorial'
 ---
 
 ## Overview
@@ -230,7 +231,7 @@ comment: {
       darkTheme: '',
     },
     disqus: {
-      // https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+      // https://help.disqus.com/en/articles/1717111-what's-a-shortname
       shortname: process.env.NEXT_PUBLIC_DISQUS_SHORTNAME,
     },
   },
@@ -292,7 +293,6 @@ Line highlighting and line numbers are now supported out of the box thanks to th
 
 The following javascript code block:
 
-````
 ```js {1, 3-4} showLineNumbers
 var num1, num2, sum
 num1 = prompt('Enter first number')
@@ -300,7 +300,6 @@ num2 = prompt('Enter second number')
 sum = parseInt(num1) + parseInt(num2) // "+" means "add"
 alert('Sum = ' + sum) // "+" means combine into a string
 ```
-````
 
 will appear as:
 
