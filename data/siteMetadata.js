@@ -6,7 +6,7 @@ const siteMetadata = {
   description: '记录我的技术学习和成长历程',
   language: 'zh-CN',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://myblog-knu2fweo1-bubailans-projects.vercel.app',
+  siteUrl: 'https://myblog-two-beta.vercel.app',
   siteRepo: 'https://github.com/bubai11/tailwind-nextjs-starter-blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
@@ -63,9 +63,9 @@ const siteMetadata = {
     giscusConfig: {
       repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
       repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
-      category: 'General',        // 使用固定的分类名称
+      category: 'General',
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'url',            // 改用 URL 映射
+      mapping: 'og:title',       // 使用页面标题作为映射
       reactions: '1',
       metadata: '1',
       inputPosition: 'bottom',
