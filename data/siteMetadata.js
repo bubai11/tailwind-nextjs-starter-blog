@@ -65,7 +65,7 @@ const siteMetadata = {
       repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
       category: 'General',
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'og:title',       // 使用页面标题作为映射
+      mapping: 'pathname',    // 改用 URL 路径进行映射
       reactions: '1',
       metadata: '1',
       inputPosition: 'bottom',
