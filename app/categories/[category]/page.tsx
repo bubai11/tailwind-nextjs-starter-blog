@@ -1,4 +1,5 @@
 import { allBlogs } from 'contentlayer/generated'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import categories from '@/data/categories'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { genPageMetadata } from 'app/seo'
@@ -22,12 +23,16 @@ export default function CategoryPage({ params }: { params: { category: string } 
     post.category?.toLowerCase() === category.toLowerCase()
   )
 
+  const sortedPosts = sortPosts(filteredPosts)
+  const posts = allCoreContent(sortedPosts)
+
   return (
     <ListLayout
-      posts={filteredPosts}
+      posts={posts}
       title={categoryObj.name}
-      initialDisplayPosts={filteredPosts}
+      initialDisplayPosts={posts}
       description={categoryObj.description}
+      showDivider={false}
     />
   )
 }
