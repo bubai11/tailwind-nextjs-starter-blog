@@ -42,7 +42,7 @@ const MobileNav = () => {
           />
         </svg>
       </button>
-      <Dialog as="div" onClose={onToggleNav} unmount={false}>
+      <Dialog as="div" onClose={onToggleNav} open={navShow}>
         <Dialog.Panel className="fixed inset-0 z-60 bg-black/25" />
 
         <Dialog.Panel className="fixed top-0 left-0 z-70 h-full w-full bg-white/95 duration-300 dark:bg-gray-950/98">
