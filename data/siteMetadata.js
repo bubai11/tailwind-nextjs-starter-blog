@@ -65,13 +65,16 @@ const siteMetadata = {
       repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
       category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'title',
+      mapping: 'specific',
+      term: '[GISCUS] {title}',
       reactions: '1',
       metadata: '1',
-      inputPosition: 'bottom',
+      inputPosition: 'top',
       lang: 'zh-CN',
-      theme: 'light',
-      darkTheme: 'dark'
+      loading: 'lazy',
+      theme: 'preferred_color_scheme',
+      darkTheme: 'dark_dimmed',
+      strict: '0'
     },
   },
   search: {
