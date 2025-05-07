@@ -1,0 +1,159 @@
+---
+title: '我的个人博客搭建之旅：从构思到部署'
+date: '2024-03-21'
+tags: ['Next.js', 'Tailwind CSS', 'Vercel', 'Blog']
+draft: false
+summary: '记录使用 Next.js、Tailwind CSS 和 Vercel 搭建个人博客的全过程，包括遇到的问题和解决方案。'
+---
+
+# 我的个人博客搭建之旅
+
+在这个信息爆炸的时代，拥有一个个人博客不仅可以记录自己的学习和成长，还能与他人分享知识和经验。本文将详细记录我使用现代技术栈搭建个人博客的全过程，包括技术选型、开发过程中遇到的问题以及最终的部署方案。
+
+## 技术栈选择
+
+在开始搭建博客之前，我仔细评估了当前流行的技术栈，最终选择了以下技术：
+
+- **Next.js 14**：React 框架，提供了出色的性能和开发体验
+- **Tailwind CSS**：原子化 CSS 框架，让样式开发更加高效
+- **Contentlayer**：将 Markdown 内容转换为类型安全的数据
+- **MDX**：支持在 Markdown 中使用 React 组件
+- **Vercel**：提供可靠的部署和托管服务
+
+这些技术的选择基于以下考虑：
+
+1. **性能优先**：Next.js 的静态生成和服务端渲染特性确保了博客的快速加载
+2. **开发效率**：Tailwind CSS 的原子化类让样式开发变得更加直观和高效
+3. **内容管理**：Contentlayer 和 MDX 的组合让博客内容管理变得更加灵活
+4. **部署便捷**：Vercel 提供了与 Next.js 的无缝集成
+
+## 开发过程
+
+### 1. 项目初始化
+
+首先使用 create-next-app 创建项目：
+
+\`\`\`bash
+npx create-next-app@latest myblog --typescript --tailwind --app
+\`\`\`
+
+### 2. 内容管理配置
+
+配置 Contentlayer 来处理 Markdown 文件：
+
+\`\`\`typescript
+// contentlayer.config.ts
+import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+
+export const Post = defineDocumentType(() => ({
+  name: 'Post',
+  filePathPattern: `**/*.mdx`,
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    draft: { type: 'boolean', default: true },
+    summary: { type: 'string', required: true },
+  },
+}))
+
+export default makeSource({
+  contentDirPath: 'data',
+  documentTypes: [Post],
+})
+\`\`\`
+
+### 3. 页面路由设计
+
+采用 App Router 进行路由设计：
+
+- 首页：展示最新博客文章列表
+- 博客页：按时间顺序展示所有文章
+- 标签页：按标签分类展示文章
+- 关于页：介绍个人信息
+
+### 4. 遇到的问题和解决方案
+
+在开发过程中遇到了一些挑战，以下是主要问题及其解决方案：
+
+#### 环境变量配置
+
+在本地开发和部署过程中，正确配置环境变量是很重要的。我遇到了一些部署失败的问题，主要是因为环境变量没有正确设置。解决方案：
+
+1. 使用 `.env.example` 文件记录所需的环境变量
+2. 在 Vercel 后台正确配置生产环境变量
+3. 确保代码中正确使用环境变量前缀（NEXT*PUBLIC*）
+
+#### 部署问题
+
+在使用 GitHub Actions 自动部署到 Vercel 时遇到了一些问题：
+
+1. **部署确认提示**：通过在部署命令中添加 `--force` 标志解决
+2. **构建缓存问题**：清除 `.vercel/output` 目录后重新构建解决
+3. **配置文件冲突**：确保 `vercel.json` 中的配置与项目设置不冲突
+
+解决方案示例：
+
+\`\`\`yaml
+
+# .github/workflows/deploy.yml
+
+name: Deploy to Vercel
+on:
+push:
+branches: - main
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps: - uses: actions/checkout@v4 - name: Deploy to Vercel
+run: vercel deploy --prod --force --token=${{ secrets.VERCEL_TOKEN }}
+\`\`\`
+
+## 部署流程
+
+最终采用的部署流程如下：
+
+1. 代码推送到 GitHub 仓库
+2. GitHub Actions 自动触发部署流程
+3. Vercel 自动构建和部署
+
+### 部署注意事项
+
+1. 确保设置了正确的 `VERCEL_TOKEN`
+2. 检查 `vercel.json` 配置是否正确
+3. 确保所有必需的环境变量都已配置
+4. 使用 `--force` 标志避免交互式确认
+
+## 后续优化计划
+
+1. **性能优化**
+
+   - 实现图片懒加载
+   - 优化字体加载
+   - 添加预加载关键资源
+
+2. **功能增强**
+
+   - 添加评论系统
+   - 实现全文搜索
+   - 添加暗色模式
+   - RSS 订阅功能
+
+3. **SEO 优化**
+   - 完善 meta 标签
+   - 生成站点地图
+   - 优化页面结构
+
+## 总结
+
+搭建个人博客是一个很有趣的过程，不仅可以学习和实践最新的 Web 技术，还能创建一个属于自己的网络空间。虽然过程中遇到了一些挑战，但通过耐心调试和查找资料，最终都得到了解决。
+
+希望这篇文章能够帮助到同样想要搭建个人博客的朋友们。如果你有任何问题或建议，欢迎在评论区留言交流。
+
+## 参考资源
+
+- [Next.js 官方文档](https://nextjs.org/docs)
+- [Tailwind CSS 文档](https://tailwindcss.com/docs)
+- [Contentlayer 文档](https://contentlayer.dev/)
+- [Vercel 部署文档](https://vercel.com/docs)
