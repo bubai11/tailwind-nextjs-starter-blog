@@ -33,15 +33,15 @@ summary: '记录使用 Next.js、Tailwind CSS 和 Vercel 搭建个人博客的�
 
 首先使用 create-next-app 创建项目：
 
-\`\`\`bash
+```bash
 npx create-next-app@latest myblog --typescript --tailwind --app
-\`\`\`
+```
 
 ### 2. 内容管理配置
 
 配置 Contentlayer 来处理 Markdown 文件：
 
-\`\`\`typescript
+```typescript
 // contentlayer.config.ts
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 
@@ -62,7 +62,7 @@ export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Post],
 })
-\`\`\`
+```
 
 ### 3. 页面路由设计
 
@@ -95,20 +95,21 @@ export default makeSource({
 
 解决方案示例：
 
-\`\`\`yaml
-
+```yaml
 # .github/workflows/deploy.yml
-
 name: Deploy to Vercel
 on:
-push:
-branches: - main
+  push:
+    branches:
+      - main
 jobs:
-deploy:
-runs-on: ubuntu-latest
-steps: - uses: actions/checkout@v4 - name: Deploy to Vercel
-run: vercel deploy --prod --force --token=${{ secrets.VERCEL_TOKEN }}
-\`\`\`
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Vercel
+        run: vercel deploy --prod --force --token=${{ secrets.VERCEL_TOKEN }}
+```
 
 ## 部署流程
 
