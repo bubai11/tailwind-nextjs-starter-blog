@@ -63,9 +63,9 @@ const siteMetadata = {
     giscusConfig: {
       repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
       repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
-      category: 'General',
+      category: 'Announcements',
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'pathname',    // 改用 URL 路径进行映射
+      mapping: 'pathname',
       reactions: '1',
       metadata: '1',
       inputPosition: 'bottom',
