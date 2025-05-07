@@ -63,15 +63,16 @@ const siteMetadata = {
     giscusConfig: {
       repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
       repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
-      category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
+      category: 'General',        // 使用固定的分类名称
       categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
-      mapping: 'pathname',
+      mapping: 'url',            // 改用 URL 映射
       reactions: '1',
-      metadata: '0',
+      metadata: '1',
       inputPosition: 'bottom',
       lang: 'zh-CN',
       theme: 'light',
-      darkTheme: 'dark_dimmed'
+      darkTheme: 'dark_dimmed',
+      emitMetadata: '0'
     },
   },
   search: {
