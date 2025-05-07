@@ -5,6 +5,8 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { genPageMetadata } from 'app/seo'
 import { Metadata } from 'next'
 
+const POSTS_PER_PAGE = 5
+
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const category = params.category
   const categoryObj = categories[category.charAt(0).toUpperCase() + category.slice(1)]
@@ -25,12 +27,19 @@ export default function CategoryPage({ params }: { params: { category: string } 
 
   const sortedPosts = sortPosts(filteredPosts)
   const posts = allCoreContent(sortedPosts)
+  const pageNumber = 1
+  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
 
   return (
     <ListLayout
       posts={posts}
       title={categoryObj.name}
-      initialDisplayPosts={posts}
+      initialDisplayPosts={initialDisplayPosts}
+      pagination={{
+        currentPage: pageNumber,
+        totalPages: totalPages
+      }}
       description={categoryObj.description}
       showDivider={false}
     />

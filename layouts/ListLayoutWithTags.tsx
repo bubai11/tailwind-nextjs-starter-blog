@@ -14,7 +14,10 @@ export type ListLayoutProps = {
   posts: CoreContent<Blog>[]
   title: string
   initialDisplayPosts?: CoreContent<Blog>[]
-  pagination?: boolean
+  pagination?: {
+    currentPage: number
+    totalPages: number
+  }
   showDivider?: boolean
   description?: string
 }
@@ -68,7 +71,7 @@ export default function ListLayoutWithTags({
   posts,
   title,
   initialDisplayPosts = [],
-  pagination = true,
+  pagination,
   showDivider = true,
   description,
 }: ListLayoutProps) {
